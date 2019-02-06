@@ -13,14 +13,14 @@ public class Helperfunctions {
 
     /**
      *
-     * @param roomname
-     * @return
+     * @param roomname for which description is required
+     * @return the description of the particular room.
      */
     public static String getRoomdescription (String roomname) throws Exception {
         String ReturnRoomDesc = "";
-        for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
-            if (roomname.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
-                ReturnRoomDesc = Mainclass.JsonParsedFile().getRooms()[i].description;
+        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
+            if (roomname.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
+                ReturnRoomDesc = Mainclass.toJsonParsFile().getRooms()[i].description;
                 return ReturnRoomDesc;
             }
 
@@ -32,17 +32,15 @@ public class Helperfunctions {
 
     /**
      *
-     * @param room
-     * @return
+     * @param room takes the name of the room.
+     * @return returns an array of directions that are possible from the room.
      */
     public static ArrayList<String> GetFowardDirections(String room) throws Exception {
-        //String AllPossibleDirections = "";
-        for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
-                //room = gson.fromJson(txt, Layout.class).getRooms()[i].name;
+        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
+            if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
                 ArrayList DirectionList = new ArrayList();
-                for (int j = 0; j < Mainclass.JsonParsedFile().getRooms()[i].directions.length; j++) {
-                    DirectionList.add(Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName);
+                for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++) {
+                    DirectionList.add(Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName);
                 }
                 return DirectionList;
             }
@@ -51,43 +49,19 @@ public class Helperfunctions {
         }
         return null;
     }
-
     /**
-     *
-     * @param directionType
-     * @param room
-     * @return
-     *
-    public static boolean ToCheckIfdirectionOk (String directionType, String room) throws Exception  {
-        String LcaseDirec = directionType.toLowerCase();
-        for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
-                ArrayList DirectionList = new ArrayList();
-                for (int j = 0; j < Mainclass.JsonParsedFile().getRooms()[i].directions.length; j++){
-                    if (Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase().equals(LcaseDirec)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-
-    */
-
-    /**
-     *
-     * @param Userinput
-     * @param room
-     * @return
+     * Checks if a particular direction would be correct for a room
+     * @param direction  input direction.
+     * @param room input for which the direction is to be checked.
+     * @return returns a boolean values depending if the direction exists for the given room.
      * @throws Exception
      */
-
-    public static boolean ToCheckInputOk  (String Userinput, String room) throws Exception{
-        String Lcase = Userinput.toLowerCase();
-        for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
-                for (int j = 0; j < Mainclass.JsonParsedFile().getRooms()[i].directions.length; j++){
-                    if (Lcase.contains(Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
+    public static boolean ifCheckInputOk  (String direction, String room) throws Exception{
+        String Lcase = direction.toLowerCase();
+        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
+            if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
+                for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++){
+                    if (Lcase.contains(Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
                         return true;
                     }
                 }
@@ -95,7 +69,6 @@ public class Helperfunctions {
         }
         return false;
     }
-
     /**
      *
      * @param q
@@ -104,11 +77,11 @@ public class Helperfunctions {
      * @throws Exception
      */
     public static String ToFollowupthedirectionfromtheRoom(String q, String room) throws Exception{
-        for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
-                for (int j = 0; j < Mainclass.JsonParsedFile().getRooms()[i].directions.length; j++){
-                    if (q.contains(" " + Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
-                        return Mainclass.JsonParsedFile().getRooms()[i].directions[j].room;
+        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
+            if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
+                for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++){
+                    if (q.contains(" " + Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
+                        return Mainclass.toJsonParsFile().getRooms()[i].directions[j].room;
                     }
                 }
             }
@@ -116,7 +89,4 @@ public class Helperfunctions {
         return null;
 
     }
-
-
-
 }

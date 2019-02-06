@@ -16,8 +16,12 @@ class HelperfunctionsTest {
     }
     @Test
     public void ToCheckInputOk()  throws  Exception {
-        assertTrue(Helperfunctions.ToCheckInputOk("East", "SiebelEntry"));
+        assertTrue(Helperfunctions.ifCheckInputOk("East", "SiebelEntry"));
 
+    }
+    @Test
+    public void ToGetfowardDirection() throws Exception {
+        assertEquals("SiebelEntry", Helperfunctions.ToFollowupthedirectionfromtheRoom("North" , "MatthewsStreet"));
     }
 
 
