@@ -5,6 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -41,7 +42,7 @@ public class Mainclass {
         boolean initial = true;
         String cuurentroom = StartingRoom;
         /**
-         *
+         * While loop
          */
         while (GameEnd == false) {
             if (initial) {
@@ -101,10 +102,18 @@ public class Mainclass {
      * @throws Exception
      */
     public static Layout JsonParsedFile() throws Exception {
-        HttpResponse<JsonNode> JSON = Unirest.get(jSONpath).asJson();
-        String txt =JSON.getBody().toString();
-        Gson GsonObject = new Gson();
-        return GsonObject.fromJson(txt, Layout.class);
+        try {
+            new URL(jSONpath).toURI();
+            HttpResponse<JsonNode> JSON = Unirest.get(jSONpath).asJson();
+            String txt =JSON.getBody().toString();
+            Gson GsonObject = new Gson();
+            return GsonObject.fromJson(txt, Layout.class);
+
+        } catch (Exception e) {
+            //nothing
+        }
+        return null;
+
     }
 }
 

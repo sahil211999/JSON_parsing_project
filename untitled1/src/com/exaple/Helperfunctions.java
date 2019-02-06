@@ -57,7 +57,7 @@ public class Helperfunctions {
      * @param directionType
      * @param room
      * @return
-     */
+     *
     public static boolean ToCheckIfdirectionOk (String directionType, String room) throws Exception  {
         String LcaseDirec = directionType.toLowerCase();
         for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
@@ -72,7 +72,7 @@ public class Helperfunctions {
         }
         return false;
 
-    }
+    */
 
     /**
      *
@@ -87,7 +87,7 @@ public class Helperfunctions {
         for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
             if (room.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
                 for (int j = 0; j < Mainclass.JsonParsedFile().getRooms()[i].directions.length; j++){
-                    if (Lcase.contains(" " + Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase() + " ")) {
+                    if (Lcase.contains(Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
                         return true;
                     }
                 }
@@ -107,7 +107,7 @@ public class Helperfunctions {
         for (int i = 0; i < Mainclass.JsonParsedFile().getRooms().length; i++) {
             if (room.equals(Mainclass.JsonParsedFile().getRooms()[i].name)) {
                 for (int j = 0; j < Mainclass.JsonParsedFile().getRooms()[i].directions.length; j++){
-                    if (q.contains(Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
+                    if (q.contains(" " + Mainclass.JsonParsedFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
                         return Mainclass.JsonParsedFile().getRooms()[i].directions[j].room;
                     }
                 }
