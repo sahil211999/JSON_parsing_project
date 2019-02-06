@@ -17,7 +17,7 @@ public class Mainclass {
     /**
      *
      */
-    public static String jSONpath;
+    public static String jSONpath = "https://courses.engr.illinois.edu/cs126/adventure/siebel.json";
 
     /**
      *

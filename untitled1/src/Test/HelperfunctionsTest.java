@@ -7,32 +7,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HelperfunctionsTest {
     @Test
-    public void testRoomdescription() throws Exception {
-        try {
-            assertEquals("You are on Matthews, outsidedfvknkf Siebel Center", Helperfunctions.getRoomdescription("MathewsStreet"));
-        } catch (NullPointerException e) {
-
-        }
+    public void testRoomdescription() throws Exception{
+        assertEquals("You are on Matthews, outside the Siebel Center", Helperfunctions.getRoomdescription("MatthewsStreet") );
     }
     @Test
     public void GetFowardDirections() throws Exception {
-        try {
-            assertEquals("st", Helperfunctions.GetFowardDirections("MathewsStreet").get(0));
-        } catch (NullPointerException e) {
-
-        }
+        assertEquals("East", Helperfunctions.GetFowardDirections("MatthewsStreet").get(0));
     }
     @Test
-    public void ToCheckInputOk() throws Exception {
-        try {
-            assertEquals(true, Helperfunctions.ToCheckInputOk("MathewsStreet", "East"));
-        } catch (NullPointerException e) {
+    public void ToCheckInputOk()  throws  Exception {
+        assertTrue(Helperfunctions.ToCheckInputOk("East", "SiebelEntry"));
 
-        }
     }
-    //@Test
-    //public void ToFollowupthedirectionfromtheroom() {
 
-    //}
+
 
 }

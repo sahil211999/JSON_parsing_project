@@ -25,7 +25,7 @@ public class Helperfunctions {
             }
 
         }
-        return null;
+        return "";
 
 
     }
