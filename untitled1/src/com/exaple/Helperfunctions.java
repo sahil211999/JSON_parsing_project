@@ -69,7 +69,8 @@ public class Helperfunctions {
         for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
             if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
                 for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++){
-                    if (followUp.contains(" " + Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
+                    if (followUp.contains(" "
+                            + Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
                         return Mainclass.toJsonParsFile().getRooms()[i].directions[j].room;
                     }
                 }
