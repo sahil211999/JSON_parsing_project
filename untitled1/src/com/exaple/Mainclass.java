@@ -48,26 +48,18 @@ public class Mainclass {
             String l = Inputvalue.nextLine();// to take input from the following line
             String original = Inputvalue.nextLine();
             String lCaseInput = original.toLowerCase();
-
-
-
             if (lCaseInput.equals("exit") || lCaseInput.equals("quit") ) {
                 System.exit(0);
             }
-
             if (lCaseInput.contains("go")) {
                 if (Helperfunctions.ifCheckInputOk(lCaseInput, cuurentroom)) {
-                    System.out.print(Helperfunctions.ToFollowupthedirectionfromtheRoom(lCaseInput, cuurentroom));
                     cuurentroom = (Helperfunctions.ToFollowupthedirectionfromtheRoom(lCaseInput, cuurentroom));
-
-
                     if (cuurentroom.equals(Mainclass.toJsonParsFile().endingRoom)) {
                         System.out.print(" You have reached your final destination");
                         System.exit(0);
                     }
-
                     System.out.print(" " + Helperfunctions.getRoomdescription(cuurentroom));
-                    System.out.print("From here you can go: ");
+                    System.out.println("From here you can go: ");
 
                     for (int i = 0; i < toJsonParsFile().getRooms().length; i++) {
                         if (toJsonParsFile().getRooms()[i].name.equals(cuurentroom)) {
