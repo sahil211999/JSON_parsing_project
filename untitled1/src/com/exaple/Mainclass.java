@@ -53,7 +53,7 @@ public class Mainclass {
             }
             if (lCaseInput.contains("go")) {
                 if (Helperfunctions.ifCheckInputOk(lCaseInput, cuurentroom)) {
-                    cuurentroom = (Helperfunctions.ToFollowupthedirectionfromtheRoom(lCaseInput, cuurentroom));
+                    cuurentroom = (Helperfunctions.toFollowupthedirectionfromtheRoom(lCaseInput, cuurentroom));
                     if (cuurentroom.equals(Mainclass.toJsonParsFile().endingRoom)) {
                         System.out.print(" You have reached your final destination");
                         System.exit(0);

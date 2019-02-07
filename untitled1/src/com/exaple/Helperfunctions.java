@@ -59,13 +59,13 @@ public class Helperfunctions {
         return false;
     }
     /**
-     *
-     * @param followUp
-     * @param room
-     * @return
+     * Gives a reference to the next room. From a given room.
+     * @param followUp The direction to which the player has chosen to move.
+     * @param room The current room the player is in.
+     * @return The next room the player enters.
      * @throws Exception
      */
-    public static String ToFollowupthedirectionfromtheRoom(String followUp, String room) throws Exception {
+    public static String toFollowupthedirectionfromtheRoom(String followUp, String room) throws Exception {
         for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
             if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
                 for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++){

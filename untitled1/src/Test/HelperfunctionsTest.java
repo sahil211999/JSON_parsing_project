@@ -8,8 +8,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class HelperfunctionsTest {
     @Test
     public void testRoomdescription() throws Exception{
-        assertEquals("You are on Matthews, outside the Siebel Center", Helperfunctions.getRoomdescription("MatthewsStreet"));
-        assertEquals("You are in the west entry of Siebel Center.  You can see the elevator, the ACM office, and hallways to the north and east.", Helperfunctions.getRoomdescription("SiebelEntry"));
+        assertEquals("You are on Matthews, outside the Siebel Center",
+                Helperfunctions.getRoomdescription("MatthewsStreet"));
+        assertEquals("You are in the west entry of Siebel Center.  " +
+                        "You can see the elevator, the ACM office, and hallways to the north and east.",
+                Helperfunctions.getRoomdescription("SiebelEntry"));
         assertEquals("", Helperfunctions.getRoomdescription("skdmf"));
     }
     @Test
@@ -28,6 +31,7 @@ class HelperfunctionsTest {
     }
     @Test
     public void ToGetfowardDirection() throws Exception {
-        assertEquals("SiebelNorthHallway", Helperfunctions.ToFollowupthedirectionfromtheRoom("go north", "SiebelEntry"));
+        assertEquals("SiebelNorthHallway",
+                Helperfunctions.toFollowupthedirectionfromtheRoom("go north", "SiebelEntry"));
     }
 }
