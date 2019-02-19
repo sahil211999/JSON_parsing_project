@@ -1,6 +1,6 @@
 package Test;
 
-import com.exaple.Helperfunctions;
+import com.example.Helperfunctions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,21 +16,21 @@ class HelperfunctionsTest {
         assertEquals("", Helperfunctions.getRoomdescription("skdmf"));
     }
     @Test
-    public void GetFowardDirections() throws Exception {
+    public void testGetFowardDirections() throws Exception {
         assertEquals("East", Helperfunctions.GetFowardDirections("MatthewsStreet").get(0));
         assertEquals("West", Helperfunctions.GetFowardDirections("SiebelEntry").get(0));
         assertEquals("Northeast", (Helperfunctions.GetFowardDirections("SiebelEntry").get(1)));
         assertEquals(null, Helperfunctions.GetFowardDirections("MathewsStree"));
     }
     @Test
-    public void ToCheckInputOk()  throws  Exception {
+    public void testToCheckInputOk()  throws  Exception {
         assertTrue(Helperfunctions.ifCheckInputOk("east", "SiebelEntry"));
         assertTrue(Helperfunctions.ifCheckInputOk("west", "SiebelEntry"));
         assertTrue(!Helperfunctions.ifCheckInputOk("NJSDNJF", "MatthewsStreet"));
 
     }
     @Test
-    public void ToGetfowardDirection() throws Exception {
+    public void testToGetfowardDirection() throws Exception {
         assertEquals("SiebelNorthHallway",
                 Helperfunctions.toFollowupthedirectionfromtheRoom("go north", "SiebelEntry"));
     }

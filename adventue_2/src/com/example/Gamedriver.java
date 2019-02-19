@@ -1,4 +1,4 @@
-package com.exaple;
+package com.example;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -10,7 +10,7 @@ import java.util.Scanner;
  * This class contains the code to navigate through the game.
  */
 
-public class Mainclass {
+public class Gamedriver {
 
     public static String jSONpath = "https://courses.engr.illinois.edu/cs126/adventure/siebel.json";
 
@@ -54,7 +54,7 @@ public class Mainclass {
             if (lCaseInput.contains("go")) {
                 if (Helperfunctions.ifCheckInputOk(lCaseInput, cuurentroom)) {
                     cuurentroom = (Helperfunctions.toFollowupthedirectionfromtheRoom(lCaseInput, cuurentroom));
-                    if (cuurentroom.equals(Mainclass.toJsonParsFile().endingRoom)) {
+                    if (cuurentroom.equals(Gamedriver.toJsonParsFile().endingRoom)) {
                         System.out.print(" You have reached your final destination");
                         System.exit(0);
                     }

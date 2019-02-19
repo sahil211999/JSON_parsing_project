@@ -1,4 +1,6 @@
-package com.exaple;
+package com.example;
+
+
 
 public class Room {
     String name;

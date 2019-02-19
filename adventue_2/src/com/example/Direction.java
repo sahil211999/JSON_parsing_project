@@ -1,4 +1,4 @@
-package com.exaple;
+package com.example;
 
 public class Direction {
     String directionName;

@@ -1,4 +1,4 @@
-package com.exaple;
+package com.example;
 import java.util.ArrayList;
 /**
  * This class contains all the helper functions for the main class.

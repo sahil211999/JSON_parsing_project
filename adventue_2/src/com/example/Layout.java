@@ -1,4 +1,8 @@
-package com.exaple;
+package com.example;
+
+/**
+ * Class contains getter methods for starting and ending rooms.
+ */
 
 public class Layout {
     String startingRoom;
