@@ -13,9 +13,9 @@ public class Helperfunctions {
      */
     public static String getRoomdescription (String roomname) throws Exception {
         String ReturnRoomDesc = "";
-        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
-            if (roomname.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
-                ReturnRoomDesc = Mainclass.toJsonParsFile().getRooms()[i].description;
+        for (int i = 0; i < Gamedriver.returnLayout.getRooms().length; i++) {
+            if (roomname.equals(Gamedriver.returnLayout.getRooms()[i].name)) {
+                ReturnRoomDesc = Gamedriver.returnLayout.getRooms()[i].description;
                 return ReturnRoomDesc;
             }
         }
@@ -27,11 +27,11 @@ public class Helperfunctions {
      * @return returns an array of directions that are possible from the room.
      */
     public static ArrayList<String> GetFowardDirections(String room) throws Exception {
-        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
+        for (int i = 0; i < Gamedriver.returnLayout.getRooms().length; i++) {
+            if (room.equals(Gamedriver.returnLayout.getRooms()[i].name)) {
                 ArrayList DirectionList = new ArrayList();
-                for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++) {
-                    DirectionList.add(Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName);
+                for (int j = 0; j < Gamedriver.returnLayout.getRooms()[i].directions.length; j++) {
+                    DirectionList.add(Gamedriver.returnLayout.getRooms()[i].directions[j].directionName);
                 }
                 return DirectionList;
             }
@@ -47,10 +47,10 @@ public class Helperfunctions {
      */
     public static boolean ifCheckInputOk  (String direction, String room) throws Exception{
         String Lcase = direction.toLowerCase();
-        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
-                for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++){
-                    if (Lcase.contains(Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
+        for (int i = 0; i < Gamedriver.returnLayout.getRooms().length; i++) {
+            if (room.equals(Gamedriver.returnLayout.getRooms()[i].name)) {
+                for (int j = 0; j < Gamedriver.returnLayout.getRooms()[i].directions.length; j++){
+                    if (Lcase.contains(Gamedriver.returnLayout.getRooms()[i].directions[j].directionName.toLowerCase())) {
                         return true;
                     }
                 }
@@ -66,12 +66,12 @@ public class Helperfunctions {
      * @throws Exception
      */
     public static String toFollowupthedirectionfromtheRoom(String followUp, String room) throws Exception {
-        for (int i = 0; i < Mainclass.toJsonParsFile().getRooms().length; i++) {
-            if (room.equals(Mainclass.toJsonParsFile().getRooms()[i].name)) {
-                for (int j = 0; j < Mainclass.toJsonParsFile().getRooms()[i].directions.length; j++){
+        for (int i = 0; i < Gamedriver.returnLayout.getRooms().length; i++) {
+            if (room.equals(Gamedriver.returnLayout.getRooms()[i].name)) {
+                for (int j = 0; j < Gamedriver.returnLayout.getRooms()[i].directions.length; j++){
                     if (followUp.contains(" "
-                            + Mainclass.toJsonParsFile().getRooms()[i].directions[j].directionName.toLowerCase())) {
-                        return Mainclass.toJsonParsFile().getRooms()[i].directions[j].room;
+                            + Gamedriver.returnLayout.getRooms()[i].directions[j].directionName.toLowerCase())) {
+                        return Gamedriver.returnLayout.getRooms()[i].directions[j].room;
                     }
                 }
             }

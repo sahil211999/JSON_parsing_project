@@ -8,6 +8,8 @@ public class Layout {
     String startingRoom;
     String endingRoom;
     Room[] rooms;
+    Player player;
+
 
     public String getStartingroom() {
         return startingRoom;
