@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class contains the code to navigate through the game.
@@ -19,20 +20,21 @@ public class Gamedriver {
 
 
     public static Layout returnLayout = new Layout();
-    public static String jSONpath = "https://gist.githubusercontent.com/sahil211999/681eee1380ddb43135be1ec6eee1655b/raw/41c1eee44269556d0443e4b7b53fbdd334214ddb/Adventure2";
-    //Player[]
+    public static String jSONpath = "https://gist.githubusercontent.com/sahil211999/b9f380d451f00aef2b0ea0d749bc1bde/raw/1024ee40d4c0121133480dcb4b2c24b6b47dbb58/Adventure2";
+    public static int playerHealth = 100;
 
     public static List<Item> itemList = new ArrayList<>();
     public static String previous;
 
     /**
      * Main method runs the algorithim which dictates the game.
-     *@param args is the arguement to intake the URL.
+     *
+     * @param args is the arguement to intake the URL.
      * @throws Exception if incorrect URL is input by the user.
      */
     public static void main(String[] args) throws Exception {
         if (args.length == 0) {
-            jSONpath = "https://gist.githubusercontent.com/sahil211999/681eee1380ddb43135be1ec6eee1655b/raw/41c1eee44269556d0443e4b7b53fbdd334214ddb/Adventure2";
+            jSONpath = "https://gist.githubusercontent.com/sahil211999/b9f380d451f00aef2b0ea0d749bc1bde/raw/1024ee40d4c0121133480dcb4b2c24b6b47dbb58/Adventure2";
         } else {
             if (jSONpath.substring(-5).equals(".json")) {
                 jSONpath = args[0];
@@ -47,7 +49,8 @@ public class Gamedriver {
 
     /**
      * This function parses the JSON file.
-     *@return it returns a Layout object.
+     *
+     * @return it returns a Layout object.
      * @throws Exception if the URL given by the user is incorrect.
      */
     public static void toJsonParsFile() throws Exception {
@@ -76,15 +79,16 @@ public class Gamedriver {
         String StartingRoom = returnLayout.startingRoom;
         boolean ifInitialItera = true;
         String cuurentroom = StartingRoom;
-        int counter;
+        int counter = -1;
+        int playerHealth = 100;
         while (ifGameEnd == false) {
-
-
             if (ifInitialItera) {
                 System.out.print(Helperfunctions.getRoomdescription(StartingRoom) + ". Your journey begins here.");
                 System.out.println(" From here you can go: " + Helperfunctions.GetFowardDirections(StartingRoom).get(0));
                 ifInitialItera = false;
             }
+            counter++;
+            runExtensions(counter);
             Scanner Inputvalue = new Scanner(System.in);
             String original = Inputvalue.nextLine();
             String lCaseInput = original.toLowerCase();
@@ -114,13 +118,13 @@ public class Gamedriver {
                                 int userInput = inputFromuser.nextInt();
                                 System.out.print("Item at which place needs to be added ?");
                                 Scanner inputFromUser2 = new Scanner(System.in);
-                                System.out.print("" +cuurentroom);
+                                System.out.print("" + cuurentroom);
                                 System.out.print("" + Helperfunctions.getRoomIndex(cuurentroom));
                                 int secondInput;
                                 secondInput = inputFromUser2.nextInt();
 
                                 returnLayout.player.items[userInput - 1].name = returnLayout.rooms[Helperfunctions.getRoomIndex(cuurentroom)].items[secondInput - 1].name;
-                                System.out.print("You acquired " + returnLayout.player.items[userInput - 1].name);
+                                System.out.print("You acquired " + returnLayout.player.items[userInput - 1].name + ". ");
 
                                 continue;
                             }
@@ -136,8 +140,6 @@ public class Gamedriver {
 
                                     System.out.print("Item at which place needs to be added ?");
                                     Scanner inputFromUser2 = new Scanner(System.in);
-                                    System.out.print("" +cuurentroom);
-                                    System.out.print("" + Helperfunctions.getRoomIndex(cuurentroom));
                                     int secondInput;
                                     secondInput = inputFromUser2.nextInt();
 
@@ -168,16 +170,9 @@ public class Gamedriver {
                             String jk;
                             jk = tocheck.trim();
                             if (Helperfunctions.toCheckifPlayerhasItem(jk)) {
-                                //System.out.println("The player had the key");
                                 if (Helperfunctions.toCheckIfTheItem(jk)) {
-                                    //System.out.println("The player had the key2");
                                     System.out.println("use" + tocheck + "with " + Helperfunctions.togetThedirectionFromAstring(lCaseInput));
-
                                     if (userinput.equals("use" + tocheck + "with " + Helperfunctions.togetThedirectionFromAstring(lCaseInput))) {
-                                        System.out.println("executed");
-                                        System.out.println("" + jk);
-                                        System.out.println("" + lCaseInput);
-                                        System.out.println("" + cuurentroom);
                                         Helperfunctions.toEnableDirection(Helperfunctions.togetThedirectionFromAstring(lCaseInput), cuurentroom, jk);
                                         continue;
                                     }
@@ -204,6 +199,7 @@ public class Gamedriver {
 
     /**
      * The function prints the possible directions for a particular room.
+     *
      * @param cuurentroom the current room as the arguement.
      */
     public static void printDirectionsFromARoom(String cuurentroom) {
@@ -215,13 +211,13 @@ public class Gamedriver {
             if (returnLayout.getRooms()[i].name.equals(cuurentroom)) {
                 for (int j = 0; j < returnLayout.getRooms()[i].directions.length; j++) {
                     if (j == 0) {
-                        System.out.print(" " + returnLayout.getRooms()[i].directions[j].directionName);
+                        System.out.print(" " + returnLayout.getRooms()[i].directions[j].directionName + "-" + returnLayout.getRooms()[i].directions[j].room);
                     }
                     if (j > 0 && j < returnLayout.getRooms()[i].directions.length - 1)
-                        System.out.print(", " + returnLayout.getRooms()[i].directions[j].directionName);
+                        System.out.print(", " + returnLayout.getRooms()[i].directions[j].directionName + "-" + returnLayout.getRooms()[i].directions[j].room);
 
                     if (j == returnLayout.getRooms()[i].directions.length - 1) {
-                        System.out.println(", " + returnLayout.getRooms()[i].directions[j].directionName + ". ");
+                        System.out.println(", " + returnLayout.getRooms()[i].directions[j].directionName + "-" + returnLayout.getRooms()[i].directions[j].room + ". ");
 
 
                     }
@@ -234,6 +230,7 @@ public class Gamedriver {
 
     /**
      * The function lists all the items a particular room has.
+     *
      * @param currentRoom
      */
 
@@ -242,8 +239,9 @@ public class Gamedriver {
         String lCaseCurrentRoom = currentRoom.toLowerCase();
         for (int i = 0; i < returnLayout.rooms.length; i++) {
             if (returnLayout.rooms[i].name.toLowerCase().equals(lCaseCurrentRoom)) {
+                System.out.println(" This room has the following items: " );
                 for (Item items : returnLayout.rooms[i].items) {
-                    System.out.println(" This room has the following items: " + items.name + ":");
+                    System.out.println(" " + items.name);
                 }
             }
         }
@@ -251,11 +249,12 @@ public class Gamedriver {
 
     /**
      * This function gives the index of the rooom
+     *
      * @param inputRoom takes input of the room for which index is needed.
      * @return returns the index of the room in the arguement.
      */
 
-    public static  int getCurrentRoomIndex(String inputRoom) {
+    public static int getCurrentRoomIndex(String inputRoom) {
         for (int i = 0; i < returnLayout.rooms.length; i++) {
             if (returnLayout.rooms[i].name.toLowerCase().equals(inputRoom.toLowerCase())) {
                 return i;
@@ -265,6 +264,90 @@ public class Gamedriver {
         return 0;
 
     }
+
+    /**
+     * This function dictates the monsters and other functionalitties
+     */
+
+    public static void runExtensions(int counter) {
+        boolean invisibilityCloak = false;
+        boolean fatigue = false;
+        if (counter % 5 == 0 & !invisibilityCloak) {
+            System.out.println("A wild checkstyle monster appeared!");
+            System.out.println("You have the option to attack it or run");
+            System.out.println("Run or Fight? If you choose to run you might get killed");
+            Random rando = new Random();
+            Random rando1 = new Random();
+            int monsterBehaviour = rando.nextInt(4);
+            int probabOfGettingKilledWhenRun = rando.nextInt(3);
+            Scanner userInput = new Scanner(System.in);
+            String inp = userInput.nextLine();
+            if (inp.toLowerCase().equals("run")) {
+                probabOfGettingKilledWhenRun++;
+                if (probabOfGettingKilledWhenRun == 1) {
+                    System.out.print("You were slow checktyle monster ate you up");
+                    System.exit(0);
+                }
+            }
+            if (inp.toLowerCase().equals("fight")) {
+                boolean monsterDead = false;
+                while (monsterDead = false) {
+                    System.out.print("You can do the following:");
+                    Helperfunctions.printArrayElements(returnLayout.player.Attacks);
+                    Scanner ino = new Scanner(System.in);
+                    String opi = ino.nextLine();
+                    for (int i = 0; i < returnLayout.player.Attacks.length; i++) {
+                        if (returnLayout.player.Attacks[i].toLowerCase().equals(opi.toLowerCase().trim())) {
+                            System.out.println("The monster died");
+                            return;
+                        }
+                    }
+
+                }
+            }
+        }
+        if (counter % 10 == 0 & counter >= 10) {
+            System.out.println("You found the invisibility cloak");
+            System.out.println("Do you wan to use it ? yes or no");
+            Scanner op = new Scanner(System.in);
+            String new1 = op.nextLine();
+            if (new1.toLowerCase().equals("yes")) {
+                invisibilityCloak = true;
+
+            }
+
+        }
+        if (counter % 5 == 0 & counter > 11) {
+            System.out.println("The invisibility cloak wore off");
+            invisibilityCloak = false;
+        }
+
+        if (counter % 3 == 0 & counter >= 15) {
+            System.out.print("The player is fatigued");
+            System.out.print("You will lose health at every move");
+            fatigue = true;
+        }
+
+        if (counter > 15 && fatigue) {
+            playerHealth--;
+            System.out.print("You lost health. Your health is" + playerHealth);
+
+        }
+
+        if (counter % 20 == 0) {
+            System.out.println("You found the health pottion");
+            System.out.println("Do you wan to use it ? yes or no");
+            Scanner op = new Scanner(System.in);
+            String new1 = op.nextLine();
+            if (new1.toLowerCase().equals("yes")) {
+                fatigue = false;
+
+            }
+        }
+
+
+    }
+
 
 
 

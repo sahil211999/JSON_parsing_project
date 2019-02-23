@@ -166,10 +166,7 @@ public class Helperfunctions {
                 System.out.print("The direction" + directions + " enabled");
                 Gamedriver.returnLayout.rooms[getRoomIndex(currentroom)].directions[getDirectionIndex(directions, currentroom)].enabled = "true ";
             }
-            System.out.println("hello" + i);
         }
-        //return 0;
-        System.out.println("yolo");
 
     }
 
@@ -189,5 +186,31 @@ public class Helperfunctions {
 
         }
         return 0;
+    }
+    public static void initializePlayerAttacksArray() {
+        for (int i = 0; i < Gamedriver.returnLayout.player.Attacks.length; i++) {
+            if (i == 0) {
+                Gamedriver.returnLayout.player.Attacks[i] = "indenation thrower";
+            }
+            if (i == 1) {
+                Gamedriver.returnLayout.player.Attacks[i] = "procrastinate";
+            }
+            if (i == 2) {
+                Gamedriver.returnLayout.player.Attacks[i] = "sleep";
+            }
+            if (i == 3) {
+                Gamedriver.returnLayout.player.Attacks[i] = "write good code";
+
+            }
+
+
+        }
+    }
+
+    public static void printArrayElements(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print( " " + array[i]);
+        }
+
     }
 }
