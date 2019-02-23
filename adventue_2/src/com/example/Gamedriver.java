@@ -53,7 +53,7 @@ public class Gamedriver {
      * @return it returns a Layout object.
      * @throws Exception if the URL given by the user is incorrect.
      */
-    public static void toJsonParsFile() throws Exception {
+    public static void toJsonParsFile() {
         try {
             new URL(jSONpath).toURI();
             HttpResponse<JsonNode> JSON = Unirest.get(jSONpath).asJson();
@@ -292,6 +292,7 @@ public class Gamedriver {
             if (inp.toLowerCase().equals("fight")) {
                 boolean monsterDead = false;
                 while (monsterDead = false) {
+                    Helperfunctions.initializePlayerAttacksArray();
                     System.out.print("You can do the following:");
                     Helperfunctions.printArrayElements(returnLayout.player.Attacks);
                     Scanner ino = new Scanner(System.in);
