@@ -50,7 +50,8 @@ public class Helperfunctions {
         for (int i = 0; i < Gamedriver.returnLayout.getRooms().length; i++) {
             if (room.equals(Gamedriver.returnLayout.getRooms()[i].name)) {
                 for (int j = 0; j < Gamedriver.returnLayout.getRooms()[i].directions.length; j++){
-                    if (Lcase.contains(Gamedriver.returnLayout.getRooms()[i].directions[j].directionName.toLowerCase())) {
+                    if (Helperfunctions.togetThedirectionFromAstring(Lcase).toLowerCase().equals(Gamedriver.returnLayout.getRooms()[i].directions[j].directionName.toLowerCase())) {
+
                         return true;
                     }
                 }
@@ -77,5 +78,116 @@ public class Helperfunctions {
             }
         }
         return null;
+    }
+    /**
+     * Checks if the direction is enabled
+     * @param direction The direction requested.
+     * @param rooms The current room in which the player is.
+     * @return The boolean value for if the direction is enabled
+     */
+
+    public static boolean  toCheckifDirectionisEnabled(String direction, String rooms) {
+        if ( Gamedriver.returnLayout.rooms[getRoomIndex(rooms)].directions[getDirectionIndex(direction, rooms)].enabled.equals("true ") ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * The function returns direction from the command input from the user.
+     * @param userInput the arguement accepted from the user from which the direction is extracted.
+     * @return returns the direction
+     */
+    public static String togetThedirectionFromAstring(String userInput) {
+        int l = userInput.toLowerCase().indexOf("go");
+        String returnStr = userInput.substring(l+2);
+         String ls;
+        ls = returnStr.trim();
+        return ls.toLowerCase();
+
+    }
+
+    /**
+     * The function checks if the player has a particular item.
+     * @param s the item for which the check has to be made.
+     * @return the boolean value depending on the result.
+     */
+
+    public static boolean toCheckIfTheItem(String s) {
+        for (int i = 0; i < Gamedriver.returnLayout.player.items.length; i++) {
+            if (s.toLowerCase().equals(Gamedriver.returnLayout.player.items[i].name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    /**
+     * The function checks if a particular player has the item.
+     * @param ls to check the irem for which the check has to be made.
+     * @return the boolean value depending if the player has the item.
+     */
+
+    public static boolean toCheckifPlayerhasItem(String ls) {
+        for (int i = 0; i < Gamedriver.returnLayout.player.items.length; i++) {
+            if (Gamedriver.returnLayout.player.items[i].name.toLowerCase().equals(ls.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * The function returns the index of the room when passed as an arguement.
+     * @param currentroom the room for which the index is required.
+     * @return the index of the room
+     */
+
+    public static int getRoomIndex(String currentroom) {
+        for (int j = 0; j < Gamedriver.returnLayout.rooms.length; j++) {
+            if (Gamedriver.returnLayout.rooms[j].name.toLowerCase().equals(currentroom.toLowerCase())) {
+                return j;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * The function helps enabling the direction for which the user has the item for
+     * @param directions the direction in which the user wants to go
+     * @param currentroom the current room in which the user is present.
+     * @param key checks if the user has that particular key.
+     */
+
+    public static void toEnableDirection(String directions, String currentroom, String key) {
+        for (int i = 0; i < Gamedriver.returnLayout.rooms[getRoomIndex(currentroom)].directions[getDirectionIndex(directions, currentroom)].validKeyNames.length; i++) {
+            if (key.toLowerCase().equals(Gamedriver.returnLayout.rooms[getRoomIndex(currentroom)].directions[getDirectionIndex(directions, currentroom)].validKeyNames[i].toLowerCase())) {
+                System.out.print("The direction" + directions + " enabled");
+                Gamedriver.returnLayout.rooms[getRoomIndex(currentroom)].directions[getDirectionIndex(directions, currentroom)].enabled = "true ";
+            }
+            System.out.println("hello" + i);
+        }
+        //return 0;
+        System.out.println("yolo");
+
+    }
+
+    /**
+     * This function returns the index of a particular direction in a particular room
+     * @param direction The direction for which the index is to be found.
+     * @param currentroom The room in which the player is present.
+     * @return the index at which the direction is present in a particular room.
+     */
+
+    public static int getDirectionIndex(String direction, String currentroom) {
+        for (int i = 0; i < Gamedriver.returnLayout.rooms[getRoomIndex(currentroom)].directions.length; i++) {
+            if (direction.toLowerCase().equals(Gamedriver.returnLayout.rooms[getRoomIndex(currentroom)].directions[i].directionName.toLowerCase())) {
+                return i;
+            }
+
+
+        }
+        return 0;
     }
 }

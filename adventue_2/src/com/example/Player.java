@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    Item[] items;
+    Item[] items = new Item[5];
     int score;
-    List<Item> arrayListofItem = new ArrayList<>();
+    //List<Item> arrayListofItem = new ArrayList<>();
 
 
 
